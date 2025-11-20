@@ -56,8 +56,13 @@ function App() {
         <div className="card-body">
           <p className="login-box-msg">Personnel Management System</p>
 
-          <center>{message && <span class="right badge badge-danger">{message}</span>}</center>
-          <br/>
+          <center>
+            {message && (
+              <span className="right badge badge-danger">{message}</span>
+            )}
+          </center>
+
+          <br />
 
           <form onSubmit={handleLogin}>
             <div className="input-group mb-3">
