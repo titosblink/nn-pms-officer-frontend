@@ -3,27 +3,27 @@ export default function Sidenav() {
     <div className="main-sidebar sidebar-style-2">
       <aside id="sidebar-wrapper">
         <div className="sidebar-brand">
-          <a href="/home">
+          <Link href="/home">
           <br/>
             <img src="/assets/images/navylogo.png" className="header-logo" alt="logo" style={{ width: "60px", height: "80px", filter: "drop-shadow(0 6px 10px rgba(0,0,0,0.6))" }}/>
-          </a>
+          </Link>
         </div>
 
         <br/><br/><br/>
 
         <ul className="sidebar-menu">
           <li className="dropdown active">
-            <a href="/home" className="nav-link">
+            <Link href="/home" className="nav-link">
               <i data-feather="monitor" />
               <span>Dashboard</span>
-            </a>
+            </Link>
           </li>
 
           <li className="dropdown">
-            <a href="/officers" className="nav-link">
+            <Link to="/officers" className="nav-link">
               <i data-feather="user" />
               <span>Officers</span>
-            </a>
+            </Link>
           </li>
         </ul>
       </aside>
