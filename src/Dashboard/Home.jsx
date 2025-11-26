@@ -1,95 +1,86 @@
 import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
+import Header from "./Header";
+import Sidenav from "./Sidenav";
+import Footer from "./Footer";
+// import "../App.css";
+
 export default function Home() {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
 
-  // LOAD USER ON PAGE LOAD
+  // LOAD USER
   useEffect(() => {
     const savedUser = localStorage.getItem("user");
 
     if (!savedUser) {
-      navigate("/"); // redirect if not logged in
+      navigate("/");
       return;
     }
 
     setUser(JSON.parse(savedUser));
   }, [navigate]);
 
-  // LOGOUT FUNCTION
+  // LOGOUT
   const handleLogout = () => {
     localStorage.removeItem("user");
-    localStorage.removeItem("token");   // <-- important fix
+    localStorage.removeItem("token");
     navigate("/");
   };
 
   return (
-    <div style={styles.container}>
-      <div style={styles.card}>
-        <h1 style={styles.title}>Welcome to the Home Page</h1>
+    <>
+      {/* FULL-WIDTH HEADER */}
+      <div className="navbar-bg" />
+      <Header user={user} handleLogout={handleLogout} />
 
-        {user && (
-          <div style={styles.userBox}>
-            <p><strong>Name:</strong> {user.name}</p>
-            <p><strong>Email:</strong> {user.email}</p>
-            <p><strong>Status:</strong> {user.status}</p>
-          </div>
-        )}
+      {/* SIDENAV + CONTENT WRAPPER */}
+      <div className="main-wrapper main-wrapper-1">
 
-        <Link to="/officers" style={styles.link}>
-          Go to Officers Page
-        </Link>
+        {/* SIDENAV */}
+        <Sidenav />
 
-        <button style={styles.logoutBtn} onClick={handleLogout}>
-          Logout
-        </button>
+        {/* MAIN CONTENT */}
+        <div className="main-content">
+          <section className="section">
+            <div className="section-body">
+            <div className="row">
+
+              {/* CARD 1 */}
+              <div className="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div className="card">
+                  <div className="card-statistic-4">
+                    <div className="row">
+                      <div className="col-lg-6 pt-3">
+                        <div className="card-content">
+                          <h5 className="font-15">Officers</h5>
+                          <h2 className="mb-3 font-18">258</h2>
+                          <p className="mb-0">
+                            <span className="col-green"><Link to="/add-officer">Add officer</Link></span>
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="col-lg-6">
+                        <div className="banner-img">
+                          <img src="assets/images/user.png" alt="" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Add the other cards here... */}
+</div>
+            </div>
+          </section>
+        </div>
+
+        {/* FOOTER */}
+        <Footer />
       </div>
-    </div>
+    </>
   );
 }
-
-// SIMPLE STYLES
-const styles = {
-  container: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    height: "100vh",
-    background: "#f5f5f5",
-  },
-  card: {
-    width: "400px",
-    padding: "30px",
-    background: "white",
-    borderRadius: "12px",
-    boxShadow: "0 0 15px rgba(0,0,0,0.1)",
-    textAlign: "center",
-  },
-  title: {
-    marginBottom: "20px",
-  },
-  userBox: {
-    textAlign: "left",
-    marginBottom: "30px",
-    lineHeight: "1.6",
-  },
-  logoutBtn: {
-    width: "100%",
-    padding: "12px",
-    background: "#00306e",
-    color: "white",
-    border: "none",
-    borderRadius: "8px",
-    cursor: "pointer",
-    fontSize: "16px"
-  },
-  link: {
-    display: "inline-block",
-    marginBottom: "20px",
-    fontSize: "18px",
-    color: "#00306e",
-    textDecoration: "none",
-    fontWeight: "bold",
-  },
-};

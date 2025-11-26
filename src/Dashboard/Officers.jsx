@@ -1,21 +1,28 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+
+import Header from "./Header";
+import Sidenav from "./Sidenav";
+import Footer from "./Footer";
+// import "../App.css";
 
 export default function Officers() {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
 
+  // LOAD USER
   useEffect(() => {
     const savedUser = localStorage.getItem("user");
 
     if (!savedUser) {
-      navigate("/");   // redirect if no session
+      navigate("/");
       return;
     }
 
     setUser(JSON.parse(savedUser));
   }, [navigate]);
 
+  // LOGOUT
   const handleLogout = () => {
     localStorage.removeItem("user");
     localStorage.removeItem("token");
@@ -23,72 +30,57 @@ export default function Officers() {
   };
 
   return (
-    <div style={styles.container}>
-      <div style={styles.card}>
-        <h1 style={styles.title}>Officers Page</h1>
+    <>
+      {/* FULL-WIDTH HEADER */}
+      <div className="navbar-bg" />
+      <Header user={user} handleLogout={handleLogout} />
 
-        {user && (
-          <p style={styles.welcome}>Welcome, {user.name}</p>
-        )}
+      {/* SIDENAV + CONTENT WRAPPER */}
+      <div className="main-wrapper main-wrapper-1">
 
-        {/* Back to Home */}
-        <button style={styles.backBtn} onClick={() => navigate("/home")}>
-          Back to Home
-        </button>
+        {/* SIDENAV */}
+        <Sidenav />
 
-        {/* Logout Button */}
-        <button style={styles.logoutBtn} onClick={handleLogout}>
-          Logout
-        </button>
+        {/* MAIN CONTENT */}
+        <div className="main-content">
+          <section className="section">
+            <div className="section-body">
+            <div className="row">
+
+              {/* CARD 1 */}
+              <div className="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div className="card">
+                  <div className="card-statistic-4">
+                    <div className="row">
+                      <div className="col-lg-6 pt-3">
+                        <div className="card-content">
+                          <h5 className="font-15">Officers</h5>
+                          <h2 className="mb-3 font-18">258</h2>
+                          <p className="mb-0">
+                            <span className="col-green"><Link to="#">Add account</Link></span>
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="col-lg-6">
+                        <div className="banner-img">
+                          <img src="assets/img/banner/1.png" alt="" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Add the other cards here... */}
+</div>
+            </div>
+          </section>
+        </div>
+
+        {/* FOOTER */}
+        <Footer />
       </div>
-    </div>
+    </>
   );
 }
-
-const styles = {
-  container: {
-    height: "100vh",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    background: "#f5f5f5",
-  },
-  card: {
-    padding: "30px",
-    width: "400px",
-    background: "white",
-    borderRadius: "12px",
-    boxShadow: "0 0 15px rgba(0,0,0,0.1)",
-    textAlign: "center",
-  },
-  title: {
-    marginBottom: "20px",
-    fontSize: "24px",
-  },
-  welcome: {
-    marginBottom: "20px",
-    fontSize: "18px",
-  },
-  backBtn: {
-    padding: "12px",
-    width: "100%",
-    fontSize: "16px",
-    background: "#00306e",
-    color: "white",
-    border: "none",
-    borderRadius: "8px",
-    cursor: "pointer",
-    marginBottom: "10px",
-  },
-  logoutBtn: {
-    padding: "12px",
-    width: "100%",
-    fontSize: "16px",
-    background: "#900000",
-    color: "white",
-    border: "none",
-    borderRadius: "8px",
-    cursor: "pointer",
-    marginTop: "10px",
-  },
-};

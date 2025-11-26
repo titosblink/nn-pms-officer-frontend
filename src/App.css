@@ -1,35 +1,10 @@
-/* Body background */
-body {
-  background-color: #001f3f; /* Navy blue */
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.main-navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 9999 !important;   /* Header goes on top */
 }
 
-/* Card styling */
-.card {
-  background-color: white;
-  border-radius: 10px;
-  padding: 20px;
-}
-
-/* Button styling */
-.btn-primary {
-  background-color: #001f3f; /* Navy blue */
-  border-color: #001f3f;      /* Match border to background */
-  color: white;               /* Make text readable */
-}
-
-.btn-primary:hover {
-  background-color: #001a35; /* Slightly darker on hover */
-  border-color: #001a35;
-}
-
-.navy-logo {
-  width: 80px;      /* Adjust width */
-  height: auto;     /* Keep aspect ratio */
-  display: block;
-  margin: 0 auto 10px; /* Center and add space below */
-  border-radius: 50%;   /* Optional: makes it circular */
+.main-sidebar {
+  z-index: 1000 !important;    /* Sidebar stays below header */
 }
