@@ -12,7 +12,7 @@ function App() {
   const [loading, setLoading] = useState(false);
 
   // 🌐 Replace this with your actual backend URL
-  const BACKEND_URL = "https://nn-officer-pms-cc589b51eb62.herokuapp.com/";
+  const BACKEND_URL = "https://nn-pms-officers-2dd5ac29e658.herokuapp.com/";
 
   const handleLogin = async (e) => {
     e.preventDefault();
