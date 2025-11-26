@@ -18,7 +18,7 @@ function App() {
     setLoading(true);
 
     try {
-      const res = await axios.post("http://localhost:5000/auth/login", {
+      const res = await axios.post("https://nn-pms-officer-frontend.vercel.app/auth/login", {
         email,
         password,
       });
