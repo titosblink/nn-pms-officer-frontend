@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function Sidenav() {
   return (
     <div className="main-sidebar sidebar-style-2">
