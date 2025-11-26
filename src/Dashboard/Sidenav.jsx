@@ -15,7 +15,7 @@ export default function Sidenav() {
 
         <ul className="sidebar-menu">
           <li className="dropdown active">
-            <Link href="/home" className="nav-link">
+            <Link to="/home" className="nav-link">
               <i data-feather="monitor" />
               <span>Dashboard</span>
             </Link>
