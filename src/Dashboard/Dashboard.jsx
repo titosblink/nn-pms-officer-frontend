@@ -62,6 +62,10 @@ export default function Dashboard() {
                 <img src="assets/img/avatars/2.png" alt="User Avatar" />
               </span>
             </button>
+            <a className="btn btn-text btn-error btn-block h-11 justify-start px-3 font-normal" href="#">
+                  <span className="icon-[tabler--logout] size-5" />
+                  Logout
+                </a>
             <ul className="dropdown-menu dropdown-open:opacity-100 max-w-75 hidden w-full space-y-0.5" role="menu" aria-orientation="vertical" aria-labelledby="profile-dropdown">
               <li className="dropdown-header pt-4.5 mb-1 gap-4 px-5 pb-3.5">
                 <div className="avatar avatar-online-top">
