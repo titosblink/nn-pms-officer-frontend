@@ -2,17 +2,67 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/assets/images/navylogo.png" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NN-PMS</title>
-  <link rel="stylesheet" href="/assets/css/app.min.css">
-  <link rel="stylesheet" href="/assets/bundles/bootstrap-social/bootstrap-social.css">
-  <link rel="stylesheet" href="/assets/css/style.css">
-  <link rel="stylesheet" href="/assets/css/components.css">
-  <link rel="stylesheet" href="/assets/css/custom.css">
-  <link rel='shortcut icon' type='image/x-icon' href='/assets/images/navylogo.png' />
+<meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>NAVSEC</title>
 
+    <meta name="description" content=" FlyonUIPro is the best FlyonUI dashboard for responsive web apps. Streamline your app development process with ease." />
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/images/navylogo.png" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&ampdisplay=swap" rel="stylesheet" />
+
+    <!-- Core CSS -->
+    <!-- endbuild -->
+
+    <!-- Vendor CSS -->
+
+    <!-- build:css -->
+    <link rel="stylesheet" href="assets/dist/css/output.css" />
+
+    <!-- Page CSS -->
+
+    <!-- Theme JS -->
+    <script type="text/javascript">
+      (function () {
+        try {
+          const root = document.documentElement;
+          const layoutPath = root.getAttribute('data-layout-path')?.replace('/', '') || 'dashboard-default';
+          const localStorageKey = `${layoutPath}-theme`;
+
+          // Theme configuration loaded from page-config.json at build time
+          window.THEME_CONFIG = { 'dashboard-free': { default: 'light', light: 'light', dark: 'dark', system: { light: 'light', dark: 'dark' } } };
+
+          // Get current system theme preference
+          const getSystemPreference = () => window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+          // Resolve theme based on user selection and layout configuration
+          const resolveTheme = (selectedTheme, layoutPath) => {
+            const layoutConfig = window.THEME_CONFIG[layoutPath];
+            if (!layoutConfig) return selectedTheme === 'system' ? (getSystemPreference() ? 'dark' : 'light') : selectedTheme;
+
+            if (selectedTheme === 'system') {
+              const systemConfig = layoutConfig.system;
+              const prefersDark = getSystemPreference();
+              return prefersDark ? systemConfig.dark : systemConfig.light;
+            }
+
+            return layoutConfig[selectedTheme] || selectedTheme || layoutConfig.default || 'light';
+          };
+
+          const savedTheme = localStorage.getItem(localStorageKey) || 'system';
+          const resolvedTheme = resolveTheme(savedTheme, layoutPath);
+
+          root.setAttribute('data-theme', resolvedTheme);
+        } catch (e) {
+          console.warn('Early theme script error:', e);
+        }
+      })();
+    </script>
 </head>
 
 <body>
@@ -21,11 +71,18 @@
   <script type="module" src="/src/main.jsx"></script>
 
 
-  <script src="/assets/js/app.min.js"></script>
-  <script src="/assets/js/scripts.js"></script>
-  <script src="/assets/js/custom.js"></script>
-  <script src="/assets/bundles/apexcharts/apexcharts.min.js"></script>
-  <script src="/assets/js/page/index.js"></script>
+  <script src="assets/dist/libs/flyonui/flyonui.js"></script>
+
+    <!-- Theme Utils JS -->
+    <script src="assets/dist/js/theme-utils.js"></script>
+
+    <!-- Main JS -->
+    <script src="assets/dist/js/main.js"></script>
+
+    <!-- Page JS -->
+
+    <button id="scrollToTopBtn" class="btn btn-circle btn-soft btn-secondary/20 bottom-15 end-15 motion-preset-slide-right motion-duration-800 motion-delay-100 fixed absolute z-[3] hidden" aria-label="Circle Soft Icon Button"><span class="icon-[tabler--chevron-up] size-5 shrink-0"></span></button>
+ 
 
 </body>
 
