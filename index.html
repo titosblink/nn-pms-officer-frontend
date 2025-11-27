@@ -2,67 +2,64 @@
 <html lang="en">
 
 <head>
-<meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
-    <meta name="robots" content="noindex, nofollow" />
-    <title>NAVSEC</title>
+  <meta charset="utf-8" />
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>NAVSEC</title>
 
-    <meta name="description" content=" FlyonUIPro is the best FlyonUI dashboard for responsive web apps. Streamline your app development process with ease." />
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="/assets/images/navylogo.png" />
+  <meta name="description"
+    content=" FlyonUIPro is the best FlyonUI dashboard for responsive web apps. Streamline your app development process with ease." />
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/assets/images/navylogo.png" />
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&ampdisplay=swap" rel="stylesheet" />
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&ampdisplay=swap"
+    rel="stylesheet" />
 
-    <!-- Core CSS -->
-    <!-- endbuild -->
+  <link rel="stylesheet" href="assets/dist/libs/apexcharts/dist/apexcharts.css" />
+  <link rel="stylesheet" href="assets/dist/libs/flyonui/src/vendor/apexcharts.css" />
 
-    <!-- Vendor CSS -->
+  <!-- build:css -->
+  <link rel="stylesheet" href="assets/dist/css/output.css" />
+  <script type="text/javascript">
+    (function () {
+      try {
+        const root = document.documentElement;
+        const layoutPath = root.getAttribute('data-layout-path')?.replace('/', '') || 'dashboard-default';
+        const localStorageKey = `${layoutPath}-theme`;
 
-    <!-- build:css -->
-    <link rel="stylesheet" href="assets/dist/css/output.css" />
+        // Theme configuration loaded from page-config.json at build time
+        window.THEME_CONFIG = { 'dashboard-free': { default: 'light', light: 'light', dark: 'dark', system: { light: 'light', dark: 'dark' } } };
 
-    <!-- Page CSS -->
+        // Get current system theme preference
+        const getSystemPreference = () => window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-    <!-- Theme JS -->
-    <script type="text/javascript">
-      (function () {
-        try {
-          const root = document.documentElement;
-          const layoutPath = root.getAttribute('data-layout-path')?.replace('/', '') || 'dashboard-default';
-          const localStorageKey = `${layoutPath}-theme`;
+        // Resolve theme based on user selection and layout configuration
+        const resolveTheme = (selectedTheme, layoutPath) => {
+          const layoutConfig = window.THEME_CONFIG[layoutPath];
+          if (!layoutConfig) return selectedTheme === 'system' ? (getSystemPreference() ? 'dark' : 'light') : selectedTheme;
 
-          // Theme configuration loaded from page-config.json at build time
-          window.THEME_CONFIG = { 'dashboard-free': { default: 'light', light: 'light', dark: 'dark', system: { light: 'light', dark: 'dark' } } };
+          if (selectedTheme === 'system') {
+            const systemConfig = layoutConfig.system;
+            const prefersDark = getSystemPreference();
+            return prefersDark ? systemConfig.dark : systemConfig.light;
+          }
 
-          // Get current system theme preference
-          const getSystemPreference = () => window.matchMedia('(prefers-color-scheme: dark)').matches;
+          return layoutConfig[selectedTheme] || selectedTheme || layoutConfig.default || 'light';
+        };
 
-          // Resolve theme based on user selection and layout configuration
-          const resolveTheme = (selectedTheme, layoutPath) => {
-            const layoutConfig = window.THEME_CONFIG[layoutPath];
-            if (!layoutConfig) return selectedTheme === 'system' ? (getSystemPreference() ? 'dark' : 'light') : selectedTheme;
+        const savedTheme = localStorage.getItem(localStorageKey) || 'system';
+        const resolvedTheme = resolveTheme(savedTheme, layoutPath);
 
-            if (selectedTheme === 'system') {
-              const systemConfig = layoutConfig.system;
-              const prefersDark = getSystemPreference();
-              return prefersDark ? systemConfig.dark : systemConfig.light;
-            }
-
-            return layoutConfig[selectedTheme] || selectedTheme || layoutConfig.default || 'light';
-          };
-
-          const savedTheme = localStorage.getItem(localStorageKey) || 'system';
-          const resolvedTheme = resolveTheme(savedTheme, layoutPath);
-
-          root.setAttribute('data-theme', resolvedTheme);
-        } catch (e) {
-          console.warn('Early theme script error:', e);
-        }
-      })();
-    </script>
+        root.setAttribute('data-theme', resolvedTheme);
+      } catch (e) {
+        console.warn('Early theme script error:', e);
+      }
+    })();
+  </script>
 </head>
 
 <body>
@@ -73,16 +70,24 @@
 
   <script src="/assets/dist/libs/flyonui/flyonui.js"></script>
 
-    <!-- Theme Utils JS -->
-    <script src="/assets/dist/js/theme-utils.js"></script>
+  <!-- Theme Utils JS -->
+  <script src="/assets/dist/js/theme-utils.js"></script>
 
-    <!-- Main JS -->
-    <script src="/assets/dist/js/main.js"></script>
+  <!-- Main JS -->
+  <script src="/assets/dist/js/main.js"></script>
 
-    <!-- Page JS -->
+  <!-- Page JS -->
+  <script src="assets/dist/libs/apexcharts/dist/apexcharts.min.js"></script>
+  <script src="assets/dist/libs/flyonui/dist/helper-apexcharts.js"></script>
 
-    <button id="scrollToTopBtn" class="btn btn-circle btn-soft btn-secondary/20 bottom-15 end-15 motion-preset-slide-right motion-duration-800 motion-delay-100 fixed absolute z-[3] hidden" aria-label="Circle Soft Icon Button"><span class="icon-[tabler--chevron-up] size-5 shrink-0"></span></button>
- 
+  <!-- Page JS -->
+  <script src="assets/dist/js//common-dashboard-free.js"></script>
+
+
+  <button id="scrollToTopBtn"
+    class="btn btn-circle btn-soft btn-secondary/20 bottom-15 end-15 motion-preset-slide-right motion-duration-800 motion-delay-100 fixed absolute z-[3] hidden"
+    aria-label="Circle Soft Icon Button"><span class="icon-[tabler--chevron-up] size-5 shrink-0"></span></button>
+
 
 </body>
 
