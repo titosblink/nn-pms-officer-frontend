@@ -5,7 +5,7 @@ export default function Footer() {
       <div className="flex items-center justify-between gap-3 max-lg:flex-col">
         <p className="text-base-content text-center">
           &copy;2025{" "}
-          <a href="https://flyonui.com/" className="text-primary">
+          <a href="#" className="text-primary">
             Nigerian Navy
           </a>
         </p>
