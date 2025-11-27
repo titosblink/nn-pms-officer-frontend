@@ -63,61 +63,63 @@ export default function Dashboard() {
             <Link className="github-button" href="#" data-icon="octicon-star" data-size="large" data-show-count="true">Welcome</Link>
           </div>
           {/* Profile Dropdown */}
-               <div className="dropdown relative inline-flex [--offset:21]" ref={dropdownRef}>
-        <button
-          id="profile-dropdown"
-          type="button"
-          className="dropdown-toggle avatar"
-          aria-haspopup="menu"
-          aria-expanded={dropdownOpen}
-          aria-label="Dropdown"
-          onClick={() => setDropdownOpen(!dropdownOpen)}
-        >
-          <span className="rounded-field size-9.5">
-            <img src="assets/img/avatars/2.png" alt="User Avatar" />
-          </span>
-        </button>
+    <div className="relative inline-flex [--offset:21]" ref={dropdownRef}>
+  <button
+    id="profile-dropdown"
+    type="button"
+    className="dropdown-toggle avatar"
+    aria-haspopup="menu"
+    aria-expanded={dropdownOpen}
+    aria-label="Dropdown"
+    onClick={() => setDropdownOpen(!dropdownOpen)}
+  >
+    <span className="rounded-field size-9.5">
+      <img src="assets/img/avatars/2.png" alt="User Avatar" />
+    </span>
+  </button>
 
-        <ul
-          className={`dropdown-menu max-w-75 w-full space-y-0.5 transition-all duration-200 ${
-            dropdownOpen ? "block opacity-100" : "hidden opacity-0"
-          }`}
-          role="menu"
-          aria-orientation="vertical"
-          aria-labelledby="profile-dropdown"
-        >
-          {/* Dropdown content */}
-          <li className="dropdown-header pt-4.5 mb-1 gap-4 px-5 pb-3.5">
-            <div className="avatar avatar-online-top">
-              <div className="w-10 rounded-full">
-                <img src="assets/img/avatars/2.png" alt="avatar" />
-              </div>
-            </div>
-            <div>
-              <h6 className="text-base-content mb-0.5 font-semibold">OC Aluu</h6>
-              <p className="text-base-content/80 font-medium">Lieutenant</p>
-            </div>
-          </li>
-          <li>
-            <Link className="dropdown-item px-3" href="#">
-              <span className="icon-[tabler--settings] size-5" />
-              Change Password
-            </Link>
-          </li>
-          <li>
-            <hr className="border-base-content/20 -mx-2 my-1" />
-          </li>
-          <li className="dropdown-footer p-2 pt-1">
-            <button
-              className="btn btn-text btn-error btn-block h-11 justify-start px-3 font-normal"
-              onClick={handleLogout}
-            >
-              <span className="icon-[tabler--logout] size-5" />
-              Logout
-            </button>
-          </li>
-        </ul>
+  <ul
+    className={`dropdown-menu transition-all duration-200 absolute top-full mt-2 bg-base-100 rounded-md shadow-lg z-50
+      ${dropdownOpen ? "block opacity-100" : "hidden opacity-0"}
+      w-56 max-sm:w-[90vw] max-sm:end-1 max-sm:ms-1
+    `}
+    role="menu"
+    aria-orientation="vertical"
+    aria-labelledby="profile-dropdown"
+  >
+    {/* Dropdown content */}
+    <li className="dropdown-header pt-4.5 mb-1 gap-4 px-5 pb-3.5">
+      <div className="avatar avatar-online-top">
+        <div className="w-10 rounded-full">
+          <img src="assets/img/avatars/2.png" alt="avatar" />
+        </div>
       </div>
+      <div>
+        <h6 className="text-base-content mb-0.5 font-semibold">OC Aluu</h6>
+        <p className="text-base-content/80 font-medium">Lieutenant</p>
+      </div>
+    </li>
+    <li>
+      <Link className="dropdown-item px-3" href="#">
+        <span className="icon-[tabler--settings] size-5" />
+        Change Password
+      </Link>
+    </li>
+    <li>
+      <hr className="border-base-content/20 -mx-2 my-1" />
+    </li>
+    <li className="dropdown-footer p-2 pt-1">
+      <button
+        className="btn btn-text btn-error btn-block h-11 justify-start px-3 font-normal"
+        onClick={handleLogout}
+      >
+        <span className="icon-[tabler--logout] size-5" />
+        Logout
+      </button>
+    </li>
+  </ul>
+</div>
+
         </div>
       </nav>
     </div>
@@ -202,7 +204,7 @@ export default function Dashboard() {
       <div className="flex items-center justify-between gap-3 max-lg:flex-col">
         <p className="text-base-content text-center">
           ©2025
-          <Link href="https://flyonui.com/" className="text-primary">Nigerian Navy</Link>
+          <Link href="https://flyonui.com/" className="text-primary"> Nigerian Navy</Link>
         </p>
         <div className="justify-enter flex items-center gap-4 max-sm:flex-col">
           <Link href="#" className="link link-primary link-animated font-normal" aria-label="More Templates" target="_blank">Designed by OC Aluu</Link>
