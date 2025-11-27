@@ -53,44 +53,64 @@ export default function Dashboard() {
         <div className="navbar-end items-end gap-6">
           {/* GitHub Button */}
           <div className="max-md:hidden">
-            <Link className="github-button" href="https://github.com/themeselection/flyonui" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star themeselection/flyonui on GitHub">Star</Link>
+            <Link className="github-button" href="#" data-icon="octicon-star" data-size="large" data-show-count="true">Welcome</Link>
           </div>
           {/* Profile Dropdown */}
-          <div className="dropdown relative inline-flex [--offset:21]">
-            <button id="profile-dropdown" type="button" className="dropdown-toggle avatar" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
-              <span className="rounded-field size-9.5">
-                <img src="assets/img/avatars/2.png" alt="User Avatar" />
-              </span>
-            </button>
-            <ul className="dropdown-menu dropdown-open:opacity-100 max-w-75 hidden w-full space-y-0.5" role="menu" aria-orientation="vertical" aria-labelledby="profile-dropdown">
-              <li className="dropdown-header pt-4.5 mb-1 gap-4 px-5 pb-3.5">
-                <div className="avatar avatar-online-top">
-                  <div className="w-10 rounded-full">
-                    <img src="assets/img/avatars/2.png" alt="avatar" />
-                  </div>
-                </div>
-                <div>
-                  <h6 className="text-base-content mb-0.5 font-semibold">OC Aluu</h6>
-                  <p className="text-base-content/80 font-medium">Lieutenant</p>
-                </div>
-              </li>
-              <li>
-                <Link className="dropdown-item px-3" href="#">
-                  <span className="icon-[tabler--settings] size-5" />
-                  Change Password
-                </Link>
-              </li>
-              <li>
-                <hr className="border-base-content/20 -mx-2 my-1" />
-              </li>
-              <li className="dropdown-footer p-2 pt-1">
-                <Link className="btn btn-text btn-error btn-block h-11 justify-start px-3 font-normal" href="#">
-                  <span className="icon-[tabler--logout] size-5" />
-                  Logout
-                </Link>
-              </li>
-            </ul>
-          </div>
+         {/* Profile Dropdown */}
+<div className="dropdown relative inline-flex [--offset:21]">
+  <button
+    id="profile-dropdown"
+    type="button"
+    className="dropdown-toggle avatar"
+    aria-haspopup="menu"
+    aria-expanded={dropdownOpen}
+    aria-label="Dropdown"
+    onClick={() => setDropdownOpen(!dropdownOpen)}
+  >
+    <span className="rounded-field size-9.5">
+      <img src="assets/img/avatars/2.png" alt="User Avatar" />
+    </span>
+  </button>
+
+  <ul
+    className={`dropdown-menu max-w-75 w-full space-y-0.5 transition-all duration-200 ${
+      dropdownOpen ? "block opacity-100" : "hidden opacity-0"
+    }`}
+    role="menu"
+    aria-orientation="vertical"
+    aria-labelledby="profile-dropdown"
+  >
+    <li className="dropdown-header pt-4.5 mb-1 gap-4 px-5 pb-3.5">
+      <div className="avatar avatar-online-top">
+        <div className="w-10 rounded-full">
+          <img src="assets/img/avatars/2.png" alt="avatar" />
+        </div>
+      </div>
+      <div>
+        <h6 className="text-base-content mb-0.5 font-semibold">OC Aluu</h6>
+        <p className="text-base-content/80 font-medium">Lieutenant</p>
+      </div>
+    </li>
+    <li>
+      <Link className="dropdown-item px-3" href="#">
+        <span className="icon-[tabler--settings] size-5" />
+        Change Password
+      </Link>
+    </li>
+    <li>
+      <hr className="border-base-content/20 -mx-2 my-1" />
+    </li>
+    <li className="dropdown-footer p-2 pt-1">
+      <button
+        className="btn btn-text btn-error btn-block h-11 justify-start px-3 font-normal"
+        onClick={handleLogout}
+      >
+        <span className="icon-[tabler--logout] size-5" />
+        Logout
+      </button>
+    </li>
+  </ul>
+</div>
         </div>
       </nav>
     </div>
