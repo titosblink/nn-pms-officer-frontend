@@ -53,7 +53,7 @@ export default function Dashboard() {
         <div className="navbar-end items-end gap-6">
           {/* GitHub Button */}
           <div className="max-md:hidden">
-            <a className="github-button" href="https://github.com/themeselection/flyonui" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star themeselection/flyonui on GitHub">Star</a>
+            <Link className="github-button" href="https://github.com/themeselection/flyonui" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star themeselection/flyonui on GitHub">Star</Link>
           </div>
           {/* Profile Dropdown */}
           <div className="dropdown relative inline-flex [--offset:21]">
@@ -62,10 +62,6 @@ export default function Dashboard() {
                 <img src="assets/img/avatars/2.png" alt="User Avatar" />
               </span>
             </button>
-            <a className="btn btn-text btn-error btn-block h-11 justify-start px-3 font-normal" href="#">
-                  <span className="icon-[tabler--logout] size-5" />
-                  Logout
-                </a>
             <ul className="dropdown-menu dropdown-open:opacity-100 max-w-75 hidden w-full space-y-0.5" role="menu" aria-orientation="vertical" aria-labelledby="profile-dropdown">
               <li className="dropdown-header pt-4.5 mb-1 gap-4 px-5 pb-3.5">
                 <div className="avatar avatar-online-top">
@@ -79,19 +75,19 @@ export default function Dashboard() {
                 </div>
               </li>
               <li>
-                <a className="dropdown-item px-3" href="#">
+                <Link className="dropdown-item px-3" href="#">
                   <span className="icon-[tabler--settings] size-5" />
                   Change Password
-                </a>
+                </Link>
               </li>
               <li>
                 <hr className="border-base-content/20 -mx-2 my-1" />
               </li>
               <li className="dropdown-footer p-2 pt-1">
-                <a className="btn btn-text btn-error btn-block h-11 justify-start px-3 font-normal" href="#">
+                <Link className="btn btn-text btn-error btn-block h-11 justify-start px-3 font-normal" href="#">
                   <span className="icon-[tabler--logout] size-5" />
                   Logout
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -150,7 +146,7 @@ export default function Dashboard() {
     <main className="mx-auto w-full max-w-[1280px] flex-1 grow space-y-6 p-6">
       {/* Stats */}
       <div className="shadow-base-300/10 rounded-box bg-base-100 flex gap-4 p-6 shadow-md max-xl:flex-col">
-        <a href="#">
+        <Link href="#">
           <div className="flex flex-1 gap-4 max-sm:flex-col">
             <div className="flex flex-1 flex-col gap-4">
               <div className="text-base-content flex items-center gap-2">
@@ -170,7 +166,7 @@ export default function Dashboard() {
             </div>
             <div className="divider sm:divider-horizontal" />
           </div>
-        </a>
+        </Link>
       </div>
     </main>
     {/* / Content */}
@@ -179,10 +175,10 @@ export default function Dashboard() {
       <div className="flex items-center justify-between gap-3 max-lg:flex-col">
         <p className="text-base-content text-center">
           ©2025
-          <a href="https://flyonui.com/" className="text-primary">Nigerian Navy</a>
+          <Link href="https://flyonui.com/" className="text-primary">Nigerian Navy</Link>
         </p>
         <div className="justify-enter flex items-center gap-4 max-sm:flex-col">
-          <a href="#" className="link link-primary link-animated font-normal" aria-label="More Templates" target="_blank">Designed by OC Aluu</a>
+          <Link href="#" className="link link-primary link-animated font-normal" aria-label="More Templates" target="_blank">Designed by OC Aluu</Link>
         </div>
       </div>
     </footer>
