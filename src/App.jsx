@@ -74,9 +74,11 @@ function App() {
             </div>
             <div className="space-y-4">
               <form className="mb-4 space-y-4" noValidate onSubmit={handleLogin}>
+                
                 <div>
-                  <label className="label-text" htmlFor="userEmail">Email address*</label>
-                  <input
+                  <label className="label-text" htmlFor="userEmail">Email Address*</label>
+                  <div className="input">
+                    <input
                       id="email"
                       type="email"
                       value={email}
@@ -85,6 +87,8 @@ function App() {
                       className="form-control"
                       autoFocus
                     />
+                    
+                  </div>
                 </div>
                 <div>
                   <label className="label-text" htmlFor="userPassword">Password*</label>
