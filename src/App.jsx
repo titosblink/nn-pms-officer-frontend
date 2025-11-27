@@ -28,7 +28,7 @@ function App() {
         localStorage.setItem("user", JSON.stringify(res.data.user));
 
         setMessage("Login successful!");
-        navigate("/home");
+        navigate("/dashboard");
       } else {
         setMessage("Login failed. Please try again.");
       }
