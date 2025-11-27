@@ -63,7 +63,7 @@ export default function Dashboard() {
             <Link className="github-button" href="#" data-icon="octicon-star" data-size="large" data-show-count="true">Welcome</Link>
           </div>
           {/* Profile Dropdown */}
-    <div className="relative inline-flex [--offset:21]" ref={dropdownRef}>
+    <div className="relative inline-flex" ref={dropdownRef}>
   <button
     id="profile-dropdown"
     type="button"
@@ -81,7 +81,7 @@ export default function Dashboard() {
   <ul
     className={`dropdown-menu transition-all duration-200 absolute top-full mt-2 bg-base-100 rounded-md shadow-lg z-50
       ${dropdownOpen ? "block opacity-100" : "hidden opacity-0"}
-      w-56 max-sm:w-[90vw] max-sm:end-1 max-sm:ms-1
+      w-56 right-0 max-sm:right-2 max-sm:left-auto
     `}
     role="menu"
     aria-orientation="vertical"
@@ -119,6 +119,7 @@ export default function Dashboard() {
     </li>
   </ul>
 </div>
+
 
         </div>
       </nav>
