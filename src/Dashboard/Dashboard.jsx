@@ -6,10 +6,8 @@ export default function Dashboard() {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const dropdownRef = useRef(null);
-  const sidebarRef = useRef(null);
 
   // Load user
   useEffect(() => {
@@ -27,9 +25,6 @@ export default function Dashboard() {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setDropdownOpen(false);
       }
-      if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
-        setSidebarOpen(false);
-      }
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
@@ -39,10 +34,6 @@ export default function Dashboard() {
     localStorage.removeItem("user");
     localStorage.removeItem("token");
     navigate("/");
-  };
-
-  const toggleSidebar = () => {
-    setSidebarOpen(!sidebarOpen);
   };
 
   const officersCount = 5000;
@@ -58,8 +49,9 @@ export default function Dashboard() {
               <button
                 type="button"
                 className="btn btn-soft btn-square btn-sm lg:hidden"
-                aria-label="Toggle Sidebar"
-                onClick={toggleSidebar}
+                aria-haspopup="dialog"
+                aria-expanded="false"
+                aria-controls="layout-sidebar"
               >
                 <span className="icon-[tabler--menu-2] size-4.5" />
               </button>
@@ -78,6 +70,22 @@ export default function Dashboard() {
             </div>
 
             <div className="navbar-end items-end gap-6">
+              {/* GitHub Button */}
+              <div className="max-md:hidden">
+                <a
+                  className="github-button"
+                  href="https://github.com/themeselection/flyonui"
+                  data-icon="octicon-star"
+                  data-size="large"
+                  data-show-count="true"
+                  aria-label="Star themeselection/flyonui on GitHub"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Star
+                </a>
+              </div>
+
               {/* Profile Dropdown */}
               <div ref={dropdownRef} className="dropdown relative inline-flex [--offset:21]">
                 <button
@@ -94,9 +102,10 @@ export default function Dashboard() {
                   </span>
                 </button>
 
+                {/* Dropdown Menu */}
                 <ul
-                  className={`dropdown-menu dropdown-open:opacity-100 max-w-75 space-y-0.5 transition-all duration-300 ease-in-out transform ${
-                    dropdownOpen ? "opacity-100 scale-100 block" : "opacity-0 scale-95 hidden"
+                  className={`dropdown-menu dropdown-open:opacity-100 max-w-75 space-y-0.5 ${
+                    dropdownOpen ? "block" : "hidden"
                   }`}
                   role="menu"
                   aria-orientation="vertical"
@@ -141,11 +150,8 @@ export default function Dashboard() {
 
       {/* ---------- SIDEBAR ---------- */}
       <aside
-        ref={sidebarRef}
         id="layout-sidebar"
-        className={`overlay drawer drawer-start sm:w-75 inset-y-0 start-0 lg:z-50 lg:block lg:shadow-none transition-transform duration-300 ${
-          sidebarOpen ? "translate-x-0" : "-translate-x-full"
-        }`}
+        className="overlay overlay-open:translate-x-0 drawer drawer-start sm:w-75 inset-y-0 start-0 hidden h-full [--auto-close:lg] lg:z-50 lg:block lg:translate-x-0 lg:shadow-none"
         aria-label="Sidebar"
         tabIndex={-1}
       >
@@ -155,7 +161,7 @@ export default function Dashboard() {
               type="button"
               className="btn btn-text btn-circle btn-sm absolute end-3 top-3 lg:hidden"
               aria-label="Close"
-              onClick={toggleSidebar}
+              data-overlay="#layout-sidebar"
             >
               <span className="icon-[tabler--x] size-4.5" />
             </button>
@@ -205,7 +211,7 @@ export default function Dashboard() {
         <main className="mx-auto w-full max-w-[1280px] flex-1 grow space-y-6 p-6">
           {/* Officers Card */}
           <Link to="/officers">
-            <div className="shadow-base-300/10 rounded-box bg-base-100 flex gap-4 p-6 shadow-md max-xl:flex-col transition-all duration-300 hover:scale-[1.01]">
+            <div className="shadow-base-300/10 rounded-box bg-base-100 flex gap-4 p-6 shadow-md max-xl:flex-col">
               <div className="flex flex-1 gap-4 max-sm:flex-col">
                 <div className="flex flex-1 flex-col gap-4">
                   <div className="text-base-content flex items-center gap-2">
