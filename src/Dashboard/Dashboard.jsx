@@ -1,5 +1,4 @@
-//src/Dashboard/Dashboard.jsx
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function Dashboard() {
@@ -7,6 +6,8 @@ export default function Dashboard() {
   const [user, setUser] = useState(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const dropdownRef = useRef(null);
 
   useEffect(() => {
     const savedUser = localStorage.getItem("user");
@@ -23,12 +24,18 @@ export default function Dashboard() {
     navigate("/");
   };
 
-  const toggleSidebar = () => {
-    setSidebarOpen(!sidebarOpen);
-  };
-
-  // Example officer count
-  const officersCount = 5000;
+  // Close dropdown if clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
    
@@ -56,61 +63,61 @@ export default function Dashboard() {
             <Link className="github-button" href="#" data-icon="octicon-star" data-size="large" data-show-count="true">Welcome</Link>
           </div>
           {/* Profile Dropdown */}
-         {/* Profile Dropdown */}
-<div className="dropdown relative inline-flex [--offset:21]">
-  <button
-    id="profile-dropdown"
-    type="button"
-    className="dropdown-toggle avatar"
-    aria-haspopup="menu"
-    aria-expanded={dropdownOpen}
-    aria-label="Dropdown"
-    onClick={() => setDropdownOpen(!dropdownOpen)}
-  >
-    <span className="rounded-field size-9.5">
-      <img src="assets/img/avatars/2.png" alt="User Avatar" />
-    </span>
-  </button>
+               <div className="dropdown relative inline-flex [--offset:21]" ref={dropdownRef}>
+        <button
+          id="profile-dropdown"
+          type="button"
+          className="dropdown-toggle avatar"
+          aria-haspopup="menu"
+          aria-expanded={dropdownOpen}
+          aria-label="Dropdown"
+          onClick={() => setDropdownOpen(!dropdownOpen)}
+        >
+          <span className="rounded-field size-9.5">
+            <img src="assets/img/avatars/2.png" alt="User Avatar" />
+          </span>
+        </button>
 
-  <ul
-    className={`dropdown-menu max-w-75 w-full space-y-0.5 transition-all duration-200 ${
-      dropdownOpen ? "block opacity-100" : "hidden opacity-0"
-    }`}
-    role="menu"
-    aria-orientation="vertical"
-    aria-labelledby="profile-dropdown"
-  >
-    <li className="dropdown-header pt-4.5 mb-1 gap-4 px-5 pb-3.5">
-      <div className="avatar avatar-online-top">
-        <div className="w-10 rounded-full">
-          <img src="assets/img/avatars/2.png" alt="avatar" />
-        </div>
+        <ul
+          className={`dropdown-menu max-w-75 w-full space-y-0.5 transition-all duration-200 ${
+            dropdownOpen ? "block opacity-100" : "hidden opacity-0"
+          }`}
+          role="menu"
+          aria-orientation="vertical"
+          aria-labelledby="profile-dropdown"
+        >
+          {/* Dropdown content */}
+          <li className="dropdown-header pt-4.5 mb-1 gap-4 px-5 pb-3.5">
+            <div className="avatar avatar-online-top">
+              <div className="w-10 rounded-full">
+                <img src="assets/img/avatars/2.png" alt="avatar" />
+              </div>
+            </div>
+            <div>
+              <h6 className="text-base-content mb-0.5 font-semibold">OC Aluu</h6>
+              <p className="text-base-content/80 font-medium">Lieutenant</p>
+            </div>
+          </li>
+          <li>
+            <Link className="dropdown-item px-3" href="#">
+              <span className="icon-[tabler--settings] size-5" />
+              Change Password
+            </Link>
+          </li>
+          <li>
+            <hr className="border-base-content/20 -mx-2 my-1" />
+          </li>
+          <li className="dropdown-footer p-2 pt-1">
+            <button
+              className="btn btn-text btn-error btn-block h-11 justify-start px-3 font-normal"
+              onClick={handleLogout}
+            >
+              <span className="icon-[tabler--logout] size-5" />
+              Logout
+            </button>
+          </li>
+        </ul>
       </div>
-      <div>
-        <h6 className="text-base-content mb-0.5 font-semibold">OC Aluu</h6>
-        <p className="text-base-content/80 font-medium">Lieutenant</p>
-      </div>
-    </li>
-    <li>
-      <Link className="dropdown-item px-3" href="#">
-        <span className="icon-[tabler--settings] size-5" />
-        Change Password
-      </Link>
-    </li>
-    <li>
-      <hr className="border-base-content/20 -mx-2 my-1" />
-    </li>
-    <li className="dropdown-footer p-2 pt-1">
-      <button
-        className="btn btn-text btn-error btn-block h-11 justify-start px-3 font-normal"
-        onClick={handleLogout}
-      >
-        <span className="icon-[tabler--logout] size-5" />
-        Logout
-      </button>
-    </li>
-  </ul>
-</div>
         </div>
       </nav>
     </div>
