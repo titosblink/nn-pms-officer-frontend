@@ -33,8 +33,7 @@ export default function Dashboard() {
   return (
    
    <>
-
-   <div className="bg-base-200 flex min-h-screen flex-col">
+<div className="bg-base-200 flex min-h-screen flex-col">
   {/* Layout Navbar */}
   {/* ---------- HEADER ---------- */}
   <div className="bg-base-100 border-base-content/20 lg:ps-75 sticky top-0 z-50 flex border-b">
@@ -54,16 +53,15 @@ export default function Dashboard() {
         <div className="navbar-end items-end gap-6">
           {/* GitHub Button */}
           <div className="max-md:hidden">
-            <Link className="github-button" href="https://github.com/themeselection/flyonui" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star themeselection/flyonui on GitHub">Star</Link>
+            <a className="github-button" href="https://github.com/themeselection/flyonui" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star themeselection/flyonui on GitHub">Star</a>
           </div>
           {/* Profile Dropdown */}
           <div className="dropdown relative inline-flex [--offset:21]">
-            <button id="profile-dropdown" type="button" onClick={() => setDropdownOpen(!dropdownOpen)} className="dropdown-toggle avatar" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
+            <button id="profile-dropdown" type="button" className="dropdown-toggle avatar" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
               <span className="rounded-field size-9.5">
                 <img src="assets/img/avatars/2.png" alt="User Avatar" />
               </span>
             </button>
-            {dropdownOpen && (
             <ul className="dropdown-menu dropdown-open:opacity-100 max-w-75 hidden w-full space-y-0.5" role="menu" aria-orientation="vertical" aria-labelledby="profile-dropdown">
               <li className="dropdown-header pt-4.5 mb-1 gap-4 px-5 pb-3.5">
                 <div className="avatar avatar-online-top">
@@ -72,27 +70,26 @@ export default function Dashboard() {
                   </div>
                 </div>
                 <div>
-                  <h6 className="text-base-content mb-0.5 font-semibold">{user?.name || "OC Aluu"}</h6>
+                  <h6 className="text-base-content mb-0.5 font-semibold">OC Aluu</h6>
                   <p className="text-base-content/80 font-medium">Lieutenant</p>
                 </div>
               </li>
               <li>
-                <Link className="dropdown-item px-3" href="#">
+                <a className="dropdown-item px-3" href="#">
                   <span className="icon-[tabler--settings] size-5" />
                   Change Password
-                </Link>
+                </a>
               </li>
               <li>
                 <hr className="border-base-content/20 -mx-2 my-1" />
               </li>
               <li className="dropdown-footer p-2 pt-1">
-                <Link onClick={handleLogout} className="btn btn-text btn-error btn-block h-11 justify-start px-3 font-normal" href="#">
+                <a className="btn btn-text btn-error btn-block h-11 justify-start px-3 font-normal" href="#">
                   <span className="icon-[tabler--logout] size-5" />
                   Logout
-                </Link>
+                </a>
               </li>
             </ul>
-            )}
           </div>
         </div>
       </nav>
@@ -149,7 +146,7 @@ export default function Dashboard() {
     <main className="mx-auto w-full max-w-[1280px] flex-1 grow space-y-6 p-6">
       {/* Stats */}
       <div className="shadow-base-300/10 rounded-box bg-base-100 flex gap-4 p-6 shadow-md max-xl:flex-col">
-        <Link href="#">
+        <a href="#">
           <div className="flex flex-1 gap-4 max-sm:flex-col">
             <div className="flex flex-1 flex-col gap-4">
               <div className="text-base-content flex items-center gap-2">
@@ -169,7 +166,7 @@ export default function Dashboard() {
             </div>
             <div className="divider sm:divider-horizontal" />
           </div>
-        </Link>
+        </a>
       </div>
     </main>
     {/* / Content */}
@@ -178,10 +175,10 @@ export default function Dashboard() {
       <div className="flex items-center justify-between gap-3 max-lg:flex-col">
         <p className="text-base-content text-center">
           ©2025
-          <Link href="https://flyonui.com/" className="text-primary">Nigerian Navy</Link>
+          <a href="https://flyonui.com/" className="text-primary">Nigerian Navy</a>
         </p>
         <div className="justify-enter flex items-center gap-4 max-sm:flex-col">
-          <Link href="#" className="link link-primary link-animated font-normal" aria-label="More Templates" target="_blank">Designed by OC Aluu</Link>
+          <a href="#" className="link link-primary link-animated font-normal" aria-label="More Templates" target="_blank">Designed by OC Aluu</a>
         </div>
       </div>
     </footer>
@@ -189,6 +186,7 @@ export default function Dashboard() {
   </div>
   {/* / Layout Container */}
 </div>
+
 
    </>
   );
