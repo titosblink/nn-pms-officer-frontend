@@ -4,6 +4,11 @@ import { Link } from "react-router-dom";
 export default function Home() {
   // Example officer count
   const officersCount = 5000;
+  const token = localStorage.getItem("token");
+
+if (!token) {
+  navigate("/");
+}
 
   return (
     <main className="mx-auto w-full max-w-[1280px] flex-1 grow space-y-6 p-6">

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 
 function App() {
@@ -63,10 +63,10 @@ function App() {
           </div>
           <div className="bg-base-100 shadow-base-300/20 z-1 sm:min-w-md w-full space-y-6 rounded-xl p-6 shadow-md lg:p-8">
             <div className="flex items-center gap-3">
-              <a href="/" className="flex items-center gap-3">
+              <Link to="/" className="flex items-center gap-3">
                 <img src="assets/images/navylogo.png" width={50} />
                 <h2 className="text-base-content text-xl font-bold">Nigerian Navy</h2>
-              </a>
+              </Link>
             </div>
             <div>
               {/* <h3 class="text-base-content mb-1.5 text-2xl font-semibold">Personnel Management System</h3> */}
@@ -109,7 +109,7 @@ function App() {
                   </div>
                 </div>
                 <div className="flex items-center justify-between gap-y-2">
-                  <a href="auth-forgot-password-1.html" className="link link-animated link-primary font-normal">Forgot Password?</a>
+                  <Link to="auth-forgot-password-1.html" className="link link-animated link-primary font-normal">Forgot Password?</Link>
                 </div>
                 <button disabled={loading} className="btn btn-lg btn-block" type="submit" style={{ backgroundColor: "#001f3f", borderColor: "#001f3f" }}>{loading ? "Logging in..." : "Sign In"}</button>
               </form>
