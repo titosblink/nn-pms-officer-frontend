@@ -73,7 +73,7 @@ export default function Addofficer() {
   const uploadToCloudinary = async (file) => {
     const data = new FormData();
     data.append("file", file);
-    data.append("upload_preset", "YOUR_UPLOAD_PRESET"); // Replace with your Cloudinary preset
+    data.append("upload_preset", "officers-nnpms"); // Replace with your Cloudinary preset
     const res = await axios.post("https://api.cloudinary.com/v1_1/dpswnndfc/image/upload", data);
     return res.data.secure_url;
   };
