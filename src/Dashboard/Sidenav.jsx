@@ -81,8 +81,10 @@ export default function Sidenav({ isOpen, toggleSidebar }) {
                   className="accordion-toggle inline-flex w-full items-center p-2 text-start text-sm font-normal"
                   onClick={() => setActiveItem("officers")}
                 >
-                  <span className="icon-[tabler--users] size-4.5"></span>
-                  <span className="grow">Officers</span>
+                  <Link to="/add-officer">
+                    <span className="icon-[tabler--users] size-4.5"></span>
+                    <span className="grow">Officers</span>
+                  </Link>
                 </button>
               </li>
             </ul>
