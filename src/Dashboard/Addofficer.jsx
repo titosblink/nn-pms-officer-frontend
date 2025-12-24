@@ -6,46 +6,48 @@ import Sidenav from "./Sidenav";
 import Footer from "./Footer";
 
 export default function Addofficer() {
-   const navigate = useNavigate();
-    const [user, setUser] = useState(null);
+  const navigate = useNavigate();
+  const [user, setUser] = useState(null);
 
-    // LOAD USER
-    useEffect(() => {
-        const savedUser = localStorage.getItem("user");
-        if (!savedUser) {
-            navigate("/");
-            return;
-        }
-        setUser(JSON.parse(savedUser));
-    }, [navigate]);
+  // LOAD USER
+  useEffect(() => {
+    const savedUser = localStorage.getItem("user");
+    if (!savedUser) {
+      navigate("/");
+      return;
+    }
+    setUser(JSON.parse(savedUser));
+  }, [navigate]);
 
-    // LOGOUT
-    const handleLogout = () => {
-        localStorage.removeItem("user");
-        localStorage.removeItem("token");
-        navigate("/");
-    };
+  // LOGOUT
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    navigate("/");
+  };
 
-    // FORM STATE
-    const [form, setForm] = useState({
-        surname: "",
-        firstname: "",
-        othername: "",
-        gender: "",
-        religion: "",
-        serviceNumber: "",
-        state: "",
-        lga: "",
-        passport: null,
-    });
+  // FORM STATE
+  const [form, setForm] = useState({
+    surname: "",
+    firstname: "",
+    othername: "",
+    gender: "",
+    religion: "",
+    serviceNumber: "",
+    state: "",
+    lga: "",
+    passportUrl: "", // Cloudinary URL
+  });
 
-    const [passportPreview, setPassportPreview] = useState(null);
-    const [lgas, setLgas] = useState([]);
-    const [success, setSuccess] = useState(false);
+  const [passportFile, setPassportFile] = useState(null);
+  const [passportPreview, setPassportPreview] = useState(null);
+  const [lgas, setLgas] = useState([]);
+  const [success, setSuccess] = useState(false);
 
-    // STATES & LGAs (abbreviated, add full list as needed)
-    const statesWithLgas = {
-        Abia: ["Aba North", "Aba South", "Arochukwu", "Bende", "Ikwuano", "Isiala Ngwa North","Isiala Ngwa South", "Isuikwuato", "Nsit Atai", "Obi Ngwa", "Ohafia", "Osisioma","Ugwunagbo", "Ukwa East", "Ukwa West", "Umuahia North", "Umuahia South"],
+  // STATES & LGAs
+  const statesWithLgas = {
+    // abbreviated for brevity
+   Abia: ["Aba North", "Aba South", "Arochukwu", "Bende", "Ikwuano", "Isiala Ngwa North","Isiala Ngwa South", "Isuikwuato", "Nsit Atai", "Obi Ngwa", "Ohafia", "Osisioma","Ugwunagbo", "Ukwa East", "Ukwa West", "Umuahia North", "Umuahia South"],
         Adamawa: ["Demsa", "Fufore", "Ganye", "Girei", "Gombi", "Guyuk", "Hong", "Jada", "Lamurde","Madagali", "Maiha", "Mayo-Belwa", "Michika", "Mubi North", "Mubi South","Numan", "Shelleng", "Song", "Toungo", "Yola North", "Yola South"],
         AkwaIbom: ["Abak", "Eastern Obolo", "Eket", "Esit Eket", "Essien Udim", "Etim Ekpo","Etinan", "Ibeno", "Ibesikpo Asutan", "Ibiono Ibom", "Ika", "Ikono", "Ikot Abasi","Ikot Ekpene", "Ini", "Itu", "Mbo", "Mkpat Enin", "Nsit Atai", "Nsit Ibom","Nsit Ubium", "Obot Akara", "Okobo", "Onna", "Oron", "Oruk Anam", "Udung Uko","Ukanafun", "Uruan", "Urue Offong Oruko", "Uyo"],
         Anambra: ["Aguata", "Anambra East", "Anambra West", "Awka North", "Awka South", "Ayamelum", "Dunukofia", "Ekwusigo", "Idemili North", "Idemili South", "Ihiala", "Njikoka", "Nnewi North", "Nnewi South", "Ogbaru", "Onitsha North", "Onitsha South", "Orumba North", "Orumba South", "Oyi"],
@@ -82,177 +84,185 @@ export default function Addofficer() {
         Yobe: ["Bursari", "Damaturu", "Fika", "Fune", "Geidam", "Gujba", "Gulani", "Jakusko", "Karasuwa", "Machina", "Nangere", "Nguru", "Potiskum", "Tarmuwa", "Yunusari", "Yusufari"],
         Zamfara: ["Anka", "Bakura", "Birnin Magaji", "Bukkuyum", "Bungudu", "Gummi", "Gusau", "Kaura Namoda", "Maradun", "Maru", "Shinkafi", "Talata Mafara", "Tsafe", "Zurmi"],
         FCT: ["Abaji", "Bwari", "Gwagwalada", "Kuje", "Kwali", "Municipal"]
+    // Add all other states here
+  };
+
+  // HANDLE CHANGE
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  // HANDLE PASSPORT FILE
+  const handlePassport = (e) => {
+    const file = e.target.files[0];
+    setPassportFile(file);
+    if (file) setPassportPreview(URL.createObjectURL(file));
+  };
+
+  useEffect(() => {
+    return () => {
+      if (passportPreview) URL.revokeObjectURL(passportPreview);
     };
+  }, [passportPreview]);
 
-    // HANDLE CHANGE
-    const handleChange = (e) => {
-        setForm({ ...form, [e.target.name]: e.target.value });
-    };
+  // STATE CHANGE → LOAD LGAs
+  const handleStateChange = (e) => {
+    const state = e.target.value;
+    setForm({ ...form, state, lga: "" });
+    setLgas(statesWithLgas[state] || []);
+  };
 
-    // HANDLE PASSPORT FILE
-    const handlePassport = (e) => {
-        const file = e.target.files[0];
-        setForm({ ...form, passport: file });
-        if (file) setPassportPreview(URL.createObjectURL(file));
-    };
+  // UPLOAD IMAGE TO CLOUDINARY
+  const uploadToCloudinary = async (file) => {
+    const data = new FormData();
+    data.append("file", file);
+    data.append("upload_preset", "YOUR_UPLOAD_PRESET"); // Replace with your preset
+    data.append("cloud_name", "YOUR_CLOUD_NAME"); // Replace with your Cloud name
 
-    useEffect(() => {
-        return () => {
-            if (passportPreview) URL.revokeObjectURL(passportPreview);
-        };
-    }, [passportPreview]);
+    const res = await axios.post("https://api.cloudinary.com/v1_1/YOUR_CLOUD_NAME/image/upload", data);
+    return res.data.secure_url;
+  };
 
-    // STATE CHANGE → LOAD LGAs
-    const handleStateChange = (e) => {
-        const state = e.target.value;
-        setForm({ ...form, state, lga: "" });
-        setLgas(statesWithLgas[state] || []);
-    };
+  // SUBMIT FORM
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-    // SUBMIT FORM
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const requiredFields = ["surname", "firstname", "gender", "serviceNumber", "state", "lga"];
+    for (let field of requiredFields) {
+      if (!form[field]) {
+        alert(`Please fill ${field}`);
+        return;
+      }
+    }
 
-        const requiredFields = ["surname", "firstname", "gender", "serviceNumber", "state", "lga", "passport"];
-        for (let field of requiredFields) {
-            if (!form[field]) {
-                alert(`Please fill ${field}`);
-                return;
-            }
-        }
+    if (!passportFile) {
+      alert("Please upload a passport image");
+      return;
+    }
 
-        try {
-            const formData = new FormData();
-            Object.keys(form).forEach(key => {
-                formData.append(key, form[key]);
-            });
+    try {
+      // Upload passport to Cloudinary
+      const uploadedUrl = await uploadToCloudinary(passportFile);
 
-            const response = await axios.post("http://localhost:5000/api/register", formData, {
-                headers: { "Content-Type": "multipart/form-data" }
-            });
+      // Prepare data for backend
+      const payload = { ...form, passportUrl: uploadedUrl };
 
-            const savedOfficer = response.data.data;
+      const response = await axios.post("http://localhost:5000/api/register", payload);
 
-            setSuccess(true);
+      setSuccess(true);
 
-            // Clear form fields except passport preview (Cloudinary)
-            setForm({
-                surname: "", firstname: "", othername: "", gender: "", religion: "",
-                serviceNumber: "", state: "", lga: "", passport: null
-            });
-
-            setPassportPreview(savedOfficer.passportUrl);
-
-        } catch (err) {
-            console.error(err);
-            alert("Error saving record.");
-        }
-    };
+      // Reset form
+      setForm({
+        surname: "", firstname: "", othername: "", gender: "", religion: "",
+        serviceNumber: "", state: "", lga: "", passportUrl: uploadedUrl
+      });
+      setPassportFile(null);
+      setPassportPreview(uploadedUrl); // Show uploaded image
+    } catch (err) {
+      console.error(err);
+      alert("Error saving record.");
+    }
+  };
 
   return (
     <div className="bg-base-200 flex min-h-screen flex-col">
-      {/* Header */}
       <Header user={user} />
-
-      {/* Sidebar */}
       <Sidenav handleLogout={handleLogout} />
 
-      {/* Main Layout */}
       <div className="lg:ps-75 flex grow flex-col">
         <main className="mx-auto w-full max-w-[1280px] flex-1 grow space-y-6 p-6">
-          {/* Dashboard content */}
-           <div className="main-content">
-                    <section className="section">
-                        <div className="section-body">
-                            <h4>Create Officer Record</h4>
+          <div className="main-content">
+            <section className="section">
+              <div className="section-body">
+                <h4>Create Officer Record</h4>
 
-                            {success && <div className="alert alert-success">Record saved successfully!</div>}
+                {success && <div className="alert alert-success">Record saved successfully!</div>}
 
-                            <div className="card">
-                                <div className="card-body">
-                                    <form onSubmit={handleSubmit}>
-                                        <div className="row">
+                <div className="card">
+                  <div className="card-body">
+                    <form onSubmit={handleSubmit}>
+                      <div className="row">
 
-                                            <div className="col-md-4">
-                                                <label>Surname *</label>
-                                                <input type="text" name="surname" className="form-control" value={form.surname} onChange={handleChange} />
-                                            </div>
-
-                                            <div className="col-md-4">
-                                                <label>First Name *</label>
-                                                <input type="text" name="firstname" className="form-control" value={form.firstname} onChange={handleChange} />
-                                            </div>
-
-                                            <div className="col-md-4">
-                                                <label>Other Name</label>
-                                                <input type="text" name="othername" className="form-control" value={form.othername} onChange={handleChange} />
-                                            </div>
-
-                                            <div className="col-md-4">
-                                                <label>Gender *</label>
-                                                <select name="gender" className="form-control" value={form.gender} onChange={handleChange}>
-                                                    <option value="">-- Select Gender --</option>
-                                                    <option value="Male">Male</option>
-                                                    <option value="Female">Female</option>
-                                                </select>
-                                            </div>
-
-                                            <div className="col-md-4">
-                                                <label>Religion</label>
-                                                <select name="religion" className="form-control" value={form.religion} onChange={handleChange}>
-                                                    <option value="">-- Select Religion --</option>
-                                                    <option>Christianity</option>
-                                                    <option>Islam</option>
-                                                    <option>Traditional</option>
-                                                    <option>Other</option>
-                                                </select>
-                                            </div>
-
-                                            <div className="col-md-4">
-                                                <label>Service Number *</label>
-                                                <input type="text" name="serviceNumber" className="form-control" value={form.serviceNumber} onChange={handleChange} />
-                                            </div>
-
-                                            <div className="col-md-4">
-                                                <label>State of Origin *</label>
-                                                <select className="form-control" value={form.state} onChange={handleStateChange}>
-                                                    <option value="">-- Select State --</option>
-                                                    {Object.keys(statesWithLgas).map(st => <option key={st} value={st}>{st}</option>)}
-                                                </select>
-                                            </div>
-
-                                            <div className="col-md-4">
-                                                <label>Local Government Area *</label>
-                                                <select className="form-control" name="lga" value={form.lga} onChange={handleChange}>
-                                                    <option value="">-- Select LGA --</option>
-                                                    {lgas.map((lga, i) => <option key={i} value={lga}>{lga}</option>)}
-                                                </select>
-                                            </div>
-
-                                            <div className="col-md-4">
-                                                <label>Passport *</label>
-                                                <input type="file" className="form-control" accept="image/*" onChange={handlePassport} />
-                                                {passportPreview && (
-                                                    <img
-                                                        src={passportPreview}
-                                                        alt="Passport"
-                                                        style={{ width: "120px", height: "120px", objectFit: "cover", borderRadius: "10px", border: "1px solid #ccc", marginTop: "10px" }}
-                                                    />
-                                                )}
-                                            </div>
-
-                                        </div>
-
-                                        <button type="submit" className="btn btn-primary mt-3">Submit Record</button>
-                                    </form>
-                                </div>
-                            </div>
+                        <div className="col-md-4">
+                          <label>Surname *</label>
+                          <input type="text" name="surname" className="form-control" value={form.surname} onChange={handleChange} />
                         </div>
-                    </section>
+
+                        <div className="col-md-4">
+                          <label>First Name *</label>
+                          <input type="text" name="firstname" className="form-control" value={form.firstname} onChange={handleChange} />
+                        </div>
+
+                        <div className="col-md-4">
+                          <label>Other Name</label>
+                          <input type="text" name="othername" className="form-control" value={form.othername} onChange={handleChange} />
+                        </div>
+
+                        <div className="col-md-4">
+                          <label>Gender *</label>
+                          <select name="gender" className="form-control" value={form.gender} onChange={handleChange}>
+                            <option value="">-- Select Gender --</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                          </select>
+                        </div>
+
+                        <div className="col-md-4">
+                          <label>Religion</label>
+                          <select name="religion" className="form-control" value={form.religion} onChange={handleChange}>
+                            <option value="">-- Select Religion --</option>
+                            <option>Christianity</option>
+                            <option>Islam</option>
+                            <option>Traditional</option>
+                            <option>Other</option>
+                          </select>
+                        </div>
+
+                        <div className="col-md-4">
+                          <label>Service Number *</label>
+                          <input type="text" name="serviceNumber" className="form-control" value={form.serviceNumber} onChange={handleChange} />
+                        </div>
+
+                        <div className="col-md-4">
+                          <label>State of Origin *</label>
+                          <select className="form-control" value={form.state} onChange={handleStateChange}>
+                            <option value="">-- Select State --</option>
+                            {Object.keys(statesWithLgas).map(st => <option key={st} value={st}>{st}</option>)}
+                          </select>
+                        </div>
+
+                        <div className="col-md-4">
+                          <label>Local Government Area *</label>
+                          <select className="form-control" name="lga" value={form.lga} onChange={handleChange}>
+                            <option value="">-- Select LGA --</option>
+                            {lgas.map((lga, i) => <option key={i} value={lga}>{lga}</option>)}
+                          </select>
+                        </div>
+
+                        <div className="col-md-4">
+                          <label>Passport *</label>
+                          <input type="file" className="form-control" accept="image/*" onChange={handlePassport} />
+                          {passportPreview && (
+                            <img
+                              src={passportPreview}
+                              alt="Passport"
+                              style={{ width: "120px", height: "120px", objectFit: "cover", borderRadius: "10px", border: "1px solid #ccc", marginTop: "10px" }}
+                            />
+                          )}
+                        </div>
+
+                      </div>
+
+                      <button type="submit" className="btn btn-primary mt-3">Submit Record</button>
+                    </form>
+                  </div>
                 </div>
+
+              </div>
+            </section>
+          </div>
         </main>
 
-        {/* Footer */}
         <Footer />
       </div>
     </div>
