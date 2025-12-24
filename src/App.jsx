@@ -5,13 +5,12 @@ import { useNavigate, Link } from "react-router-dom";
 
 function App() {
   const navigate = useNavigate();
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const BACKEND_URL = "https://nn-pms-officers-2dd5ac29e658.herokuapp.com";
+  const BACKEND_URL = "https://nn-pms-officers-2dd5ac29e658.herokuapp.com"; // your deployed backend
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -19,14 +18,16 @@ function App() {
     setLoading(true);
 
     try {
-      const res = await axios.post(`${BACKEND_URL}/auth/login`, { email, password });
+      const res = await axios.post(`${BACKEND_URL}/auth/login`, { email, password }, {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true, // only if backend uses cookies
+      });
 
       setLoading(false);
 
-      if (res.data && res.data.token) {
+      if (res.data.token) {
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("user", JSON.stringify(res.data.user));
-
         setMessage("Login successful!");
         navigate("/dashboard");
       } else {
@@ -34,7 +35,7 @@ function App() {
       }
     } catch (err) {
       setLoading(false);
-      if (err.response && err.response.data && err.response.data.message) {
+      if (err.response && err.response.data?.message) {
         setMessage(err.response.data.message);
       } else if (err.request) {
         setMessage("No response from server. Check your backend.");
