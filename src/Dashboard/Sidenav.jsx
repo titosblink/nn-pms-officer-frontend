@@ -47,7 +47,7 @@ export default function Sidenav({ handleLogout }) {
                                             onClick={() => setActiveItem("officers")}
                                         >
                                             <span className="icon-[tabler--users] size-4.5"></span>
-                                            <span className="grow">Officerss</span>
+                                            <span className="grow">Officers</span>
                                         </Link>
                                     </li>
                                 </ul>
