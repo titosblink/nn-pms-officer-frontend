@@ -55,14 +55,16 @@ export default function Sidenav({ isOpen, toggleSidebar }) {
                 className={`accordion-item ${activeItem === "dashboard" ? "active" : ""
                   }`}
               >
-                <button
+                <Link
+                  to="/dashboard"
                   className="accordion-toggle inline-flex w-full items-center p-2 text-start text-sm font-normal"
                   onClick={() => setActiveItem("dashboard")}
                 >
                   <span className="icon-[tabler--dashboard] size-4.5"></span>
                   <span className="grow">Dashboard</span>
-                </button>
+                </Link>
               </li>
+
 
               {/* Section Divider */}
               <li className="text-base-content/50 mt-2 p-2 text-xs uppercase relative before:absolute before:-start-3 before:top-1/2 before:h-0.5 before:w-2.5 before:bg-base-content/20">
@@ -80,7 +82,7 @@ export default function Sidenav({ isOpen, toggleSidebar }) {
                   onClick={() => setActiveItem("officers")}
                 >
                   <span className="icon-[tabler--users] size-4.5"></span>
-                  <span className="grow">Officers</span>
+                  <span className="grow">Officersx</span>
                 </Link>
               </li>
             </ul>
