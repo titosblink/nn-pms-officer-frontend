@@ -9,12 +9,12 @@ import Dashboard from "./Dashboard/Dashboard";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <HashRouter>
-   
+   <Routes>
       <Route path="/" element={<App />} />
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/home" element={<Home />} />
       <Route path="/officers" element={<Officers />} />
       <Route path="/add-officer" element={<Addofficer />} />
-    
+    </Routes>
   </HashRouter>
 );
