@@ -18,9 +18,8 @@ export default function Sidenav({ isOpen, toggleSidebar }) {
       {/* Sidebar */}
       <aside
         id="layout-sidebar"
-        className={`fixed inset-y-0 start-0 z-50 h-full w-64 transform overflow-y-auto border-r border-base-content/20 bg-base-100 p-0 transition-transform duration-300 lg:relative lg:translate-x-0 ${
-          isOpen ? "translate-x-0" : "-translate-x-full"
-        }`}
+        className={`fixed inset-y-0 start-0 z-50 h-full w-64 transform overflow-y-auto border-r border-base-content/20 bg-base-100 p-0 transition-transform duration-300 lg:relative lg:translate-x-0 ${isOpen ? "translate-x-0" : "-translate-x-full"
+          }`}
         aria-label="Sidebar"
       >
         <div className="flex h-full flex-col">
@@ -53,9 +52,8 @@ export default function Sidenav({ isOpen, toggleSidebar }) {
             <ul className="accordion menu menu-sm gap-1 p-3">
               {/* Dashboard */}
               <li
-                className={`accordion-item ${
-                  activeItem === "dashboard" ? "active" : ""
-                }`}
+                className={`accordion-item ${activeItem === "dashboard" ? "active" : ""
+                  }`}
               >
                 <button
                   className="accordion-toggle inline-flex w-full items-center p-2 text-start text-sm font-normal"
@@ -73,19 +71,17 @@ export default function Sidenav({ isOpen, toggleSidebar }) {
 
               {/* Officers */}
               <li
-                className={`accordion-item ${
-                  activeItem === "officers" ? "active" : ""
-                }`}
+                className={`accordion-item ${activeItem === "officers" ? "active" : ""
+                  }`}
               >
-                <button
+                <Link
+                  to="/add-officer"
                   className="accordion-toggle inline-flex w-full items-center p-2 text-start text-sm font-normal"
                   onClick={() => setActiveItem("officers")}
                 >
-                  <Link to="/add-officer">
-                    <span className="icon-[tabler--users] size-4.5"></span>
-                    <span className="grow">Officerss</span>
-                  </Link>
-                </button>
+                  <span className="icon-[tabler--users] size-4.5"></span>
+                  <span className="grow">Officers</span>
+                </Link>
               </li>
             </ul>
           </div>
