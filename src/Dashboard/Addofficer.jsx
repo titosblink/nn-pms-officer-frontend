@@ -39,7 +39,7 @@ export default function Addofficer() {
             </div>
 
             <div className="navbar-end">
-              <span className="font-medium">Welcome</span>
+              <span className="font-medium">Welcome Admin</span>
             </div>
           </nav>
         </div>
