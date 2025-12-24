@@ -69,17 +69,7 @@ function App() {
               fill="url(#paint0_linear_1_667)"
             />
             <defs>
-              <linearGradient
-                id="paint0_linear_1_667"
-                x1="306"
-                y1="0"
-                x2="306"
-                y2="697"
-                gradientUnits="userSpaceOnUse"
-              >
-                <stop stopColor="#2C3E50" />
-                <stop offset="1" stopColor="#4CA1AF" />
-              </linearGradient>
+              
             </defs>
           </svg>
         </div>
