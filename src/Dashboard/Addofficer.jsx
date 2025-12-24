@@ -134,7 +134,7 @@ export default function Addofficer() {
 
       // Send to backend
       const payload = { ...form, passportUrl: uploadedUrl };
-      await axios.post("https://nn-pms-officers-2dd5ac29e658.herokuapp.com/register", payload);
+      await axios.post("https://nn-pms-officers-2dd5ac29e658.herokuapp.com/api/register", payload);
 
       setSuccess(true);
       setForm({
