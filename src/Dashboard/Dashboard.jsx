@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Footer from "./Footer";
 import Sidenav from "./Sidenav";
+import Sidenav from "./Header";
 
 export default function Dashboard() {
     const navigate = useNavigate();
