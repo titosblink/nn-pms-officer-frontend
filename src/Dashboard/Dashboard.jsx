@@ -106,10 +106,14 @@ export default function Dashboard() {
                                     <li className="text-base-content/50 before:bg-base-content/20 mt-2 p-2 text-xs uppercase before:absolute before:-start-3 before:top-1/2 before:h-0.5 before:w-2.5">Pages</li>
                                     {/* Accordion Menu Item (Level 0) */}
                                     <li className="accordion-item" id="account-settings">
-                                        <button className="accordion-toggle accordion-item-active:bg-neutral/10 inline-flex w-full items-center p-2 text-start text-sm font-normal">
-                                            <span className="icon-[tabler--users] size-4.5" />
-                                            <span className="grow">Officers</span>
-                                        </button>
+                                        <Link
+                  to="/add-officer"
+                  className="accordion-toggle inline-flex w-full items-center p-2 text-start text-sm font-normal"
+                  onClick={() => setActiveItem("officers")}
+                >
+                  <span className="icon-[tabler--users] size-4.5"></span>
+                  <span className="grow">Officers</span>
+                </Link>
                                     </li>
                                 </ul>
                             </div>
