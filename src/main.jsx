@@ -4,7 +4,7 @@ import { HashRouter, BrowserRouter, Routes, Route } from "react-router-dom";
 import App from "./App";
 import Home from "./Dashboard/Home";
 import Officers from "./Dashboard/Officers";   // ✅ IMPORT THIS
-import Addofficer from "./Dashboard/Addofficer ";
+import Addofficer from "./Dashboard/Addofficer";
 import Dashboard from "./Dashboard/Dashboard";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
