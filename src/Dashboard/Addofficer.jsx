@@ -108,6 +108,7 @@ export default function Addofficer() {
     const data = new FormData();
     data.append("file", file);
     data.append("upload_preset", "officers-nnpms"); // Replace with your Cloudinary preset
+    
     const res = await axios.post("https://api.cloudinary.com/v1_1/dpswnndfc/image/upload", data);
     return res.data.secure_url;
   };
@@ -134,7 +135,10 @@ export default function Addofficer() {
 
       // Send to backend
       const payload = { ...form, passportUrl: uploadedUrl };
-      await axios.post("https://nn-pms-officers-2dd5ac29e658.herokuapp.com/api/register", payload);
+      // await axios.post("https://nn-pms-officers-2dd5ac29e658.herokuapp.com/api/register", payload);
+      // 3. ADD THE CORRECTED URL HERE:
+      // We added "/officer" because your server.js uses: app.use("/api/officer", officerRouter);
+      await axios.post("https://nn-pms-officers-2dd5ac29e658.herokuapp.com/api/officer/register", payload);
 
       setSuccess(true);
       setForm({
