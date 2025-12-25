@@ -60,7 +60,7 @@ function App() {
             <div className="flex items-center gap-3">
               <Link to="/" className="flex items-center gap-3">
                 <img src="assets/images/navylogo.png" width={50} />
-                <h2 className="text-base-content text-xl font-bold">Nigerianss Navy</h2>
+                <h2 className="text-base-content text-xl font-bold">Nigerian Navy</h2>
               </Link>
             </div>
             <div>
