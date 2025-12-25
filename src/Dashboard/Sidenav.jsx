@@ -2,8 +2,10 @@ import { Link } from "react-router-dom";
 
 export default function Sidenav({ handleLogout }) {
     return (
-        <aside id="layout-sidebar" className="overlay overlay-open:translate-x-0 drawer drawer-start sm:w-75 inset-y-0 start-0 hidden h-full [--auto-close:lg] lg:z-50 lg:block lg:translate-x-0 lg:shadow-none" aria-label="Sidebar" tabIndex={-1}>
-                    <div className="drawer-body border-base-content/20 h-full border-e p-0">
+        <aside className={`fixed inset-y-0 left-0 z-50 w-75 bg-base-100 transition-transform 
+  ${props.isOpen ? "translate-x-0" : "-translate-x-full"} lg:translate-x-0`}>
+  {/* Menu content */}
+<div className="drawer-body border-base-content/20 h-full border-e p-0">
                         <div className="flex h-full max-h-full flex-col">
                             <button type="button" className="btn btn-text btn-circle btn-sm absolute end-3 top-3 lg:hidden" aria-label="Close" data-overlay="#layout-sidebar">
                                 <span className="icon-[tabler--x] size-4.5" />
