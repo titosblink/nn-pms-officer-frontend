@@ -1,6 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { HashRouter, BrowserRouter, Routes, Route } from "react-router-dom";
+
+// --- ADD THESE CSS IMPORTS ---
+import 'bootstrap/dist/css/bootstrap.min.css'; // Standard Bootstrap
+
+
 import App from "./App";
 import Home from "./Dashboard/Home";
 import Officers from "./Dashboard/Officers";   // ✅ IMPORT THIS
