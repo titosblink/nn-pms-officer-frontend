@@ -4,6 +4,8 @@ import { HashRouter, BrowserRouter, Routes, Route } from "react-router-dom";
 
 // --- ADD THESE CSS IMPORTS ---
 import 'bootstrap/dist/css/bootstrap.min.css'; // Standard Bootstrap
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 
 
 import App from "./App";
