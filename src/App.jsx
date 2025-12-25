@@ -13,37 +13,31 @@ function App() {
   const BACKEND_URL = "https://nn-pms-officers-2dd5ac29e658.herokuapp.com"; // your deployed backend
 
   const handleLogin = async (e) => {
-    e.preventDefault();
-    setMessage("");
-    setLoading(true);
+  e.preventDefault();
+  setMessage("");
+  setLoading(true);
 
-    try {
-      const res = await axios.post(`${BACKEND_URL}/auth/login`, { email, password }, {
-        headers: { "Content-Type": "application/json" },
-        withCredentials: true, // only if backend uses cookies
-      });
+  try {
+    const res = await axios.post(`${BACKEND_URL}/auth/login`, { email, password }, {
+      headers: { "Content-Type": "application/json" },
+      withCredentials: true, // This is REQUIRED for sessions/cookies
+    });
 
-      setLoading(false);
+    setLoading(false);
 
-      if (res.data.token) {
-        localStorage.setItem("token", res.data.token);
-        localStorage.setItem("user", JSON.stringify(res.data.user));
-        setMessage("Login successful!");
-        navigate("/dashboard");
-      } else {
-        setMessage("Login failed. Please try again.");
-      }
-    } catch (err) {
-      setLoading(false);
-      if (err.response && err.response.data?.message) {
-        setMessage(err.response.data.message);
-      } else if (err.request) {
-        setMessage("No response from server. Check your backend.");
-      } else {
-        setMessage("Something went wrong. Try again.");
-      }
+    // CHANGE: Check for res.data.user instead of res.data.token
+    if (res.data.user) {
+      localStorage.setItem("user", JSON.stringify(res.data.user));
+      setMessage("Login successful!");
+      navigate("/dashboard");
+    } else {
+      setMessage("Login failed. Unexpected response from server.");
     }
-  };
+  } catch (err) {
+    setLoading(false);
+    // ... rest of your error handling
+  }
+};
 
   return (
     <>
@@ -66,7 +60,7 @@ function App() {
             <div className="flex items-center gap-3">
               <Link to="/" className="flex items-center gap-3">
                 <img src="assets/images/navylogo.png" width={50} />
-                <h2 className="text-base-content text-xl font-bold">Nigerian Navy</h2>
+                <h2 className="text-base-content text-xl font-bold">Nigeriansz Navy</h2>
               </Link>
             </div>
             <div>
