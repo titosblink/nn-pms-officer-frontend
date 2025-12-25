@@ -8,7 +8,6 @@ export default function Dashboard() {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
 
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   useEffect(() => {
     const savedUser = localStorage.getItem("user");
@@ -30,22 +29,13 @@ export default function Dashboard() {
   return (
     <div className="bg-base-200 flex min-h-screen flex-col">
       {/* Header */}
-      <Header user={user} toggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}/>
+      <Header user={user} />
 
       {/* Sidebar */}
-      <Sidenav handleLogout={handleLogout}
-       isOpen={isSidebarOpen} 
-        closeSidebar={() => setIsSidebarOpen(false)} 
-        />
+      <Sidenav handleLogout={handleLogout} />
 
       {/* Main Layout */}
       <div className="lg:ps-75 flex grow flex-col">
-        {isSidebarOpen && (
-          <div 
-            className="fixed inset-0 z-40 bg-black/50 lg:hidden" 
-            onClick={() => setIsSidebarOpen(false)}
-          />
-        )}
         <main className="mx-auto w-full max-w-[1280px] flex-1 grow space-y-6 p-6">
           {/* Dashboard content */}
           <div className="shadow-base-300/10 rounded-box bg-base-100 flex gap-4 p-6 shadow-md max-xl:flex-col">

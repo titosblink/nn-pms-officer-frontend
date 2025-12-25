@@ -29,9 +29,6 @@ export default function Header({ user }) {
               aria-controls="layout-sidebar"
               data-overlay="#layout-sidebar"
             >
-              <button onClick={props.toggleSidebar} className="lg:hidden ...">
-                <span className="icon-[tabler--menu-2] size-6" />
-              </button>
               <span className="icon-[tabler--menu-2] size-4.5" />
             </button>
             {/* Search */}
