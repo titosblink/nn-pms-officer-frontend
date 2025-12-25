@@ -106,7 +106,7 @@ function App() {
                 <div className="flex items-center justify-between gap-y-2">
                   <Link to="auth-forgot-password-1.html" className="link link-animated link-primary font-normal">Forgot Password?</Link>
                 </div>
-                <button disabled={loading} className="btn btn-lg btn-block" type="submit">{loading ? "Logging in..." : "Sign In"}</button>
+                <button disabled={loading} className="btn btn-lg btn-block" type="submit" style={{ backgroundColor: "#001f3f", borderColor: "#001f3f", color: "#fff", }}>{loading ? "Logging in..." : "Sign In"}</button>
               </form>
               {message && (
                   <div className={`alert mt-3 ${message.includes("successful") ? "alert-success" : "alert-danger"}`}>
