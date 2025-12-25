@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 // --- ADD THESE CSS IMPORTS ---
-import 'bootstrap/dist/css/bootstrap.min.css'; // Standard Bootstrap
+
 
 
 import Header from "./Header";
